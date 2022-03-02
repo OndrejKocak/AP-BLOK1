@@ -5,18 +5,20 @@ int uloha1_6(){
     char checksum_nacitany[2];
     int checksum_vypocitany=0, dlzka_dat, dlzka_riadku, x=0;
     scanf(":%2x", &dlzka_dat);
-    dlzka_riadku = dlzka_dat +4;
+    dlzka_riadku = dlzka_dat +3;
     checksum_vypocitany = dlzka_dat;
 
-    for(int i=1;i<dlzka_riadku;i++){
+    for(int i=1;i<=dlzka_riadku;i++){
         scanf("%2x", &x);
         checksum_vypocitany =checksum_vypocitany + x;
     }
-    scanf("%2x", &checksum_nacitany);
+    scanf("%2s", &checksum_nacitany);
     printf("---nacitane---\n");
 
-    printf("%x\n", checksum_vypocitany);
-    printf("%X", 255-(checksum_vypocitany%256)+1);
+    printf("%x\n", checksum_vypocitany%256);
+    printf("%x\n", 255-(checksum_vypocitany%256));
+    printf("%X\n", 255-(checksum_vypocitany%256)+1);
+    printf("%s", checksum_nacitany);
 }
 
 
