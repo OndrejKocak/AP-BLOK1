@@ -52,7 +52,7 @@ void uloha1_3(){
     }
 }
 
-int uloha1_6(){
+int uloha1_6(){ //funkcia vypocita checksum zadaneho intelhex riadku
     char checksum_nacitany[2];
     int checksum_vypocet, dlzka_dat, dlzka_riadku, x, checksum, checksum_nacitany_int;
     scanf("\n:%2x", &dlzka_dat);
@@ -63,10 +63,11 @@ int uloha1_6(){
         scanf("%2x", &x);
         checksum_vypocet =checksum_vypocet + x;
     }
-
     scanf("%2s", &checksum_nacitany);
-    checksum =(255-(checksum_vypocet%256)+1);
+
+    checksum =(255-(checksum_vypocet%256)+1);// FF - sucet mod 256 + 1
     printf("Vypocitany checksum: %X\n", checksum);
+
     if(strcmp(checksum_nacitany, "xx")==0 || strcmp(checksum_nacitany, "XX")==0){
         sscanf(checksum_nacitany,"%x", &checksum_nacitany_int);
         if(checksum == checksum_nacitany_int){
@@ -77,7 +78,54 @@ int uloha1_6(){
     }
     return checksum;
 }
+void uloha1_2(){ //funkcia vypise zadane cislo rimskymi cislicami
+    int cislo;
+    printf("Zadajte cislo v rozsahu 1-100:\n");
+    scanf("%d", &cislo);
+    if(cislo > 100 || cislo <= 0){
+        printf("cislo je mimo rozsah 1-100");
+    }
+    else if(cislo == 100){
+        printf("C");
+    }
+    else{
+        if(cislo >= 90){
+            cislo = cislo - 90;
+            printf("XC");
+        }
+        if(cislo >= 50){
+            cislo = cislo - 50;
+            printf("L");
+        }
+        if(cislo >= 40){
+            cislo = cislo - 40;
+            printf("XL");
+        }
 
+        while(cislo>=10){
+            cislo = cislo - 10;
+            printf("X");
+        }
+
+        if(cislo == 9){
+            printf("IX");
+            return;
+        }
+        if(cislo >= 5){
+            cislo = cislo - 5;
+            printf("V");
+        }
+        if(cislo == 4){
+            printf("IV");
+            return;
+        }
+        while(cislo > 0){
+            cislo = cislo -1;
+            printf("I");
+        }
+
+    }
+}
 
 int main() {
     //vypisParne(30);
